@@ -8,7 +8,7 @@ import VueAxios from "vue-axios";
 //     ? "http://10.0.117.63/"
 //     : "http://" + window.location.host;
 
-export const baseUrl = "http://localhost/";
+export const baseUrl = "http://19.19.1.2:5000/";
 
 axios.defaults.baseURL = baseUrl;
 Vue.use(VueAxios, axios);

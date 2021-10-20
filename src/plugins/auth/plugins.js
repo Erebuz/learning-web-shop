@@ -15,7 +15,8 @@ Vue.use(auth, {
     router: driverRouterVueRouter,
   },
   options: {
-    rolesKey: "role",
+    rolesKey: "username",
+    rememberKey: "user",
     tokenDefaultKey: "access_token",
     stores: ["storage"],
     notFoundRedirect: { path: "/login" },
@@ -33,5 +34,8 @@ Vue.use(auth, {
       enabled: false,
     },
     makeRequest: true,
+    parseUserData: (req) => {
+      return req.me;
+    },
   },
 });

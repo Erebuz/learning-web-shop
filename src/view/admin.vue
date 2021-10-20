@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div>{{ user }}</div>
+    <div>Admin {{ user }}</div>
     <v-btn @click="test">Click</v-btn>
   </div>
 </template>
 
 <script>
 export default {
-  name: "general",
+  name: "admin",
   data() {
     return {};
   },
@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     test() {
-      this.$http.get("/").then((res) => {
+      this.$http.get("/admin").then((res) => {
         console.log(res);
       });
     },

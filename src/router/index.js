@@ -5,19 +5,35 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    name: "general",
-    component: () => import("@/view/login"),
-    meta: {
-      auth: true,
-    },
-  },
-  {
     path: "/login",
     name: "login",
     component: () => import("@/view/login"),
     meta: {
       auth: false,
+    },
+  },
+  {
+    path: "/",
+    name: "general",
+    component: () => import("@/view/general"),
+    meta: {
+      auth: true,
+    },
+  },
+  {
+    path: "/admin",
+    name: "admin",
+    component: () => import("@/view/admin"),
+    meta: {
+      auth: true,
+    },
+  },
+  {
+    path: "/user",
+    name: "user",
+    component: () => import("@/view/user"),
+    meta: {
+      auth: true,
     },
   },
   {
