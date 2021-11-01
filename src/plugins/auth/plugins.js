@@ -28,10 +28,10 @@ Vue.use(auth, {
     },
     fetchData: { url: "/auth/me", method: "GET", enabled: true },
     refreshData: {
-      // url: "/auth/refresh",
-      // method: "POST",
-      // interval: 20,
-      enabled: false,
+      url: "/auth/refresh",
+      method: "POST",
+      interval: 360,
+      enabled: true,
     },
     makeRequest: true,
     parseUserData: (req) => {

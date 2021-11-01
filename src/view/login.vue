@@ -27,6 +27,12 @@
             />
             <v-btn block type="submit">Логин</v-btn>
           </v-form>
+          <v-btn
+            block
+            class="mt-4"
+            @click="$router.push({ path: 'registration' })"
+            >Регистрация</v-btn
+          >
         </v-card>
       </v-col>
     </v-row>
@@ -47,6 +53,7 @@ export default {
     this.$auth
       .fetch()
       .then(() => {
+        console.log(this.$auth.user());
         this.$router.push("/");
       })
       .catch(() => {

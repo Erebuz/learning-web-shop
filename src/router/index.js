@@ -5,6 +5,11 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    path: "/",
+    name: "general",
+    component: () => import("@/view/general"),
+  },
+  {
     path: "/login",
     name: "login",
     component: () => import("@/view/login"),
@@ -13,11 +18,11 @@ const routes = [
     },
   },
   {
-    path: "/",
-    name: "general",
-    component: () => import("@/view/general"),
+    path: "/registration",
+    name: "registration",
+    component: () => import("@/view/registration"),
     meta: {
-      auth: true,
+      auth: false,
     },
   },
   {
