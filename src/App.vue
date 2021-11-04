@@ -17,6 +17,9 @@
         @click="$router.push({ path: '/login' })"
         >Войти</v-btn
       >
+      <v-btn v-else @click="$router.push({ path: '/' })"
+        >Вернуться к выбору товара</v-btn
+      >
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" app temporary>
       <v-list-item>
@@ -69,6 +72,21 @@ export default {
           title: "Создание личных кабинетов",
           path: "cabinetFactory",
           permissions: ["admin", "owner"],
+        },
+        {
+          title: "Просмотр истории клиентов",
+          path: "clientsHistory",
+          permissions: ["seller"],
+        },
+        {
+          title: "Работа с товарами",
+          path: "products",
+          permissions: ["seller", "owner"],
+        },
+        {
+          title: "Статистика товаров",
+          path: "rating",
+          permissions: ["owner"],
         },
       ];
     },

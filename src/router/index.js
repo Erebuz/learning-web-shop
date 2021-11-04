@@ -56,6 +56,39 @@ const routes = [
     },
   },
   {
+    path: "/clients_history",
+    name: "clientsHistory",
+    component: () => import("@/view/clientsHistory"),
+    meta: {
+      auth: {
+        roles: ["seller"],
+        redirect: "/",
+      },
+    },
+  },
+  {
+    path: "/products",
+    name: "products",
+    component: () => import("@/view/products"),
+    meta: {
+      auth: {
+        roles: ["seller", "owner"],
+        redirect: "/",
+      },
+    },
+  },
+  {
+    path: "/rating",
+    name: "rating",
+    component: () => import("@/view/rating"),
+    meta: {
+      auth: {
+        roles: ["owner"],
+        redirect: "/",
+      },
+    },
+  },
+  {
     path: "*",
     redirect: "/login",
   },
