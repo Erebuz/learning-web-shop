@@ -40,10 +40,14 @@ export default {
     this.refresh_data();
   },
   methods: {
-    refresh_data() {},
+    refresh_data() {
+      this.$http.get("/get_user_data").then((res) => (this.user = res.data));
+    },
     change_data() {
       if (this.$refs.form.validate()) {
-        console.log("SET CHANGE");
+        this.$http
+          .post("/change_user_data", this.user)
+          .then(() => this.refresh_data());
       }
     },
   },
