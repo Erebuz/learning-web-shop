@@ -21,14 +21,17 @@
     <v-navigation-drawer v-model="drawer" app temporary>
       <v-list-item>
         <v-list-item-content>
-          <router-link
-            v-for="link of links"
-            :key="link.path"
-            :to="link.path"
-            class="link"
-            active-class="selected"
-            >{{ link.title }}</router-link
-          >
+          <template v-for="link of links">
+            <router-link
+              v-show="show_link(link.permissions)"
+              :key="link.path"
+              :to="{ name: link.path }"
+              class="link"
+              active-class="selected"
+              exact
+              >{{ link.title }}</router-link
+            >
+          </template>
         </v-list-item-content>
       </v-list-item>
     </v-navigation-drawer>
@@ -50,12 +53,22 @@ export default {
     links() {
       return [
         {
-          title: "Создание кабинетов пользователя",
-          path: "admin",
+          title: "Выбор товара",
+          path: "general",
         },
         {
-          title: "User",
-          path: "user",
+          title: "Личный кабинет",
+          path: "cabinet",
+        },
+        {
+          title: "История заказов",
+          path: "history",
+          permissions: ["client"],
+        },
+        {
+          title: "Создание личных кабинетов",
+          path: "cabinetFactory",
+          permissions: ["admin", "owner"],
         },
       ];
     },
@@ -64,6 +77,16 @@ export default {
     logout() {
       localStorage.removeItem("refresh_token");
       this.$auth.logout({}).then();
+    },
+    show_link(permissions) {
+      if (permissions === undefined) return true;
+
+      for (let permission of permissions) {
+        if (this.$auth.check(permission)) {
+          return true;
+        }
+      }
+      return false;
     },
   },
 };

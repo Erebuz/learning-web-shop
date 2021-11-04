@@ -15,7 +15,7 @@ Vue.use(auth, {
     router: driverRouterVueRouter,
   },
   options: {
-    rolesKey: "username",
+    rolesKey: "roles",
     rememberKey: "user",
     tokenDefaultKey: "access_token",
     stores: ["storage"],

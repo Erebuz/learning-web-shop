@@ -26,19 +26,33 @@ const routes = [
     },
   },
   {
-    path: "/admin",
-    name: "admin",
-    component: () => import("@/view/admin"),
+    path: "/cabinet",
+    name: "cabinet",
+    component: () => import("@/view/cabinet"),
     meta: {
       auth: true,
     },
   },
   {
-    path: "/user",
-    name: "user",
-    component: () => import("@/view/user"),
+    path: "/history",
+    name: "history",
+    component: () => import("@/view/history"),
     meta: {
-      auth: true,
+      auth: {
+        roles: "client",
+        redirect: "/",
+      },
+    },
+  },
+  {
+    path: "/cabinet_factory",
+    name: "cabinetFactory",
+    component: () => import("@/view/cabinetFactory"),
+    meta: {
+      auth: {
+        roles: ["admin", "owner"],
+        redirect: "/",
+      },
     },
   },
   {

@@ -1,12 +1,12 @@
 <template>
-  <v-form ref="form" @submit.prevent="register">
-    <h4>Заполните поля для регистрации</h4>
+  <div>
     <v-text-field
       v-model="user.mail"
       label="E-mail"
       placeholder="Обязательно"
       :rules="[rules.required, rules.is_mail]"
       outlined
+      @change="refresh"
     />
     <v-text-field
       v-model="user.login"
@@ -41,32 +41,18 @@
     <v-text-field v-model="user.address.build" label="Строение" outlined />
     <v-text-field v-model="user.address.apartment" label="Квартира" outlined />
     <v-text-field v-model="user.birth_date" label="День рождения" outlined />
-    <v-btn block type="submit">Зарегистрироваться</v-btn>
-  </v-form>
+  </div>
 </template>
 
 <script>
-import user from "@/view/user";
+import user from "@/view/cabinet";
 
 export default {
   name: "userRegister",
+  props: ["value"],
   data() {
     return {
-      user: {
-        mail: "",
-        login: "",
-        password: "",
-        firstname: "",
-        lastname: "",
-        phone_number: "",
-        address: {
-          city: "",
-          street: "",
-          build: "",
-          apartment: "",
-        },
-        birth_date: "",
-      },
+      user: this.value,
       rules: {
         required: (val) => val !== "" || "Обязательное поле",
         is_mail: (val) =>
@@ -78,30 +64,8 @@ export default {
     };
   },
   methods: {
-    register() {
-      if (this.$refs.form.validate()) {
-        this.$http
-          .post("/reg/user", this.user)
-          .then(() => this.clear_data())
-          .then(() => this.$router.push({ path: "/login" }));
-      }
-    },
-    clear_data() {
-      this.user = {
-        mail: "",
-        login: "",
-        password: "",
-        firstname: "",
-        lastname: "",
-        phone_number: "",
-        address: {
-          city: "",
-          street: "",
-          build: "",
-          apartment: "",
-        },
-        birth_date: "",
-      };
+    refresh() {
+      this.$emit("input", this.user);
     },
   },
 };
