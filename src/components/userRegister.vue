@@ -14,6 +14,7 @@
       placeholder="Обязательно"
       :rules="[rules.required]"
       outlined
+      @change="refresh"
     >
     </v-text-field>
     <v-text-field
@@ -24,6 +25,7 @@
       placeholder="Обязательно"
       :rules="[rules.required]"
       outlined
+      @change="refresh"
     />
     <v-text-field
       type="password"
@@ -32,21 +34,60 @@
       placeholder="Обязательно"
       :rules="[rules.password_confirm]"
       outlined
+      @change="refresh"
     />
-    <v-text-field v-model="user.firstname" label="Имя" outlined />
-    <v-text-field v-model="user.lastname" label="Фамилия" outlined />
-    <v-text-field v-model="user.phone_number" label="Телефон" outlined />
-    <v-text-field v-model="user.address.city" label="Город" outlined />
-    <v-text-field v-model="user.address.street" label="Улица" outlined />
-    <v-text-field v-model="user.address.build" label="Строение" outlined />
-    <v-text-field v-model="user.address.apartment" label="Квартира" outlined />
-    <v-text-field v-model="user.birth_date" label="День рождения" outlined />
+    <v-text-field
+      v-model="user.firstname"
+      label="Имя"
+      outlined
+      @change="refresh"
+    />
+    <v-text-field
+      v-model="user.lastname"
+      label="Фамилия"
+      outlined
+      @change="refresh"
+    />
+    <v-text-field
+      v-model="user.phone_number"
+      label="Телефон"
+      outlined
+      @change="refresh"
+    />
+    <v-text-field
+      v-model="user.address.city"
+      label="Город"
+      outlined
+      @change="refresh"
+    />
+    <v-text-field
+      v-model="user.address.street"
+      label="Улица"
+      outlined
+      @change="refresh"
+    />
+    <v-text-field
+      v-model="user.address.build"
+      label="Строение"
+      outlined
+      @change="refresh"
+    />
+    <v-text-field
+      v-model="user.address.apartment"
+      label="Квартира"
+      outlined
+      @change="refresh"
+    />
+    <v-text-field
+      v-model="user.birth_date"
+      label="День рождения"
+      outlined
+      @change="refresh"
+    />
   </div>
 </template>
 
 <script>
-import user from "@/view/cabinet";
-
 export default {
   name: "userRegister",
   props: ["value"],
@@ -62,6 +103,11 @@ export default {
           val == this.user.password || "Пароли не совпадают",
       },
     };
+  },
+  watch: {
+    value() {
+      this.user = this.value;
+    },
   },
   methods: {
     refresh() {

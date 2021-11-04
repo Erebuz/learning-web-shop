@@ -55,6 +55,10 @@ export default {
             role: 1,
           },
           {
+            name: "Владелец",
+            role: 2,
+          },
+          {
             name: "Продавец",
             role: 3,
           },
@@ -85,6 +89,10 @@ export default {
       switch (this.role) {
         case 1: {
           path = "/reg/admin";
+          break;
+        }
+        case 2: {
+          path = "/reg/owner";
           break;
         }
         case 3: {
