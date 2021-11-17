@@ -12,6 +12,7 @@ const routes = [
   {
     path: "/order",
     name: "order",
+    props: true,
     component: () => import("@/view/order"),
   },
   {

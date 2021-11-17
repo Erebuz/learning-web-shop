@@ -70,7 +70,6 @@ export default {
             username: this.username,
             password: this.password,
           },
-          redirect: "/",
           fetchUser: true,
         })
         .then()

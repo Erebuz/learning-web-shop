@@ -80,8 +80,8 @@ export default {
           path: "general",
         },
         {
-          title: "Оформление заказа",
-          path: "order",
+          title: "Корзина",
+          path: "basket",
         },
         {
           title: "Личный кабинет",
