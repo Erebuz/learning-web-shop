@@ -1,26 +1,5 @@
 <template>
   <v-app>
-    <v-app-bar app elevation="2">
-      <v-app-bar-nav-icon v-if="$auth.user()" @click="drawer = true"
-        ><v-icon large>mdi-menu</v-icon></v-app-bar-nav-icon
-      >
-      <v-toolbar-title
-        @click="$router.push({ path: '/' })"
-        style="cursor: pointer"
-      >
-        Shop
-      </v-toolbar-title>
-      <v-spacer />
-      <v-btn v-if="$auth.user()" @click="logout">Выйти</v-btn>
-      <v-btn
-        v-else-if="$route.name != 'login'"
-        @click="$router.push({ path: '/login' })"
-        >Войти</v-btn
-      >
-      <v-btn v-else @click="$router.push({ path: '/' })"
-        >Вернуться к выбору товара</v-btn
-      >
-    </v-app-bar>
     <v-navigation-drawer v-model="drawer" app temporary>
       <v-list-item>
         <v-list-item-content>
@@ -38,8 +17,34 @@
         </v-list-item-content>
       </v-list-item>
     </v-navigation-drawer>
+    <v-app-bar app elevation="2">
+      <v-app-bar-nav-icon v-if="$auth.user()" @click="drawer = true"
+        ><v-icon large>mdi-menu</v-icon></v-app-bar-nav-icon
+      >
+      <v-toolbar-title
+        @click="$router.push({ path: '/' })"
+        style="cursor: pointer"
+      >
+        Shop
+      </v-toolbar-title>
+      <v-spacer />
+      <div v-if="$route.name === 'general'" class="d-flex">
+        <div class="d-flex align-center mr-2">
+          В корзине товаров: {{ basket_count }}
+        </div>
+        <v-btn :disabled="basket_count === 0" @click="go_to_bye"
+          >В корзину</v-btn
+        >
+      </div>
+      <v-btn v-else @click="$router.push({ path: '/' })"
+        >Вернуться к выбору товара</v-btn
+      >
+      <v-spacer />
+      <v-btn v-if="$auth.user()" @click="logout">Выйти</v-btn>
+      <v-btn v-else @click="$router.push({ path: '/login' })">Войти</v-btn>
+    </v-app-bar>
     <v-main>
-      <router-view />
+      <router-view @flag="change_flag" />
     </v-main>
   </v-app>
 </template>
@@ -50,14 +55,33 @@ export default {
   data() {
     return {
       drawer: false,
+      flag: false,
     };
   },
   computed: {
+    basket_count() {
+      this.flag;
+
+      let stor = JSON.parse(localStorage.getItem("basket"));
+      if (!stor) return 0;
+
+      let count = 0;
+      let basket = JSON.parse(localStorage.getItem("basket"));
+      basket.forEach((item) => {
+        count += item.count;
+      });
+
+      return count;
+    },
     links() {
       return [
         {
           title: "Выбор товара",
           path: "general",
+        },
+        {
+          title: "Оформление заказа",
+          path: "order",
         },
         {
           title: "Личный кабинет",
@@ -106,6 +130,12 @@ export default {
       }
       return false;
     },
+    change_flag() {
+      this.flag = !this.flag;
+    },
+    go_to_bye() {
+      this.$router.push({ name: "basket" });
+    },
   },
 };
 </script>
@@ -117,7 +147,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 .link {
   text-decoration: none;
