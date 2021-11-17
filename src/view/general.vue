@@ -155,7 +155,6 @@ export default {
   methods: {
     load_products() {
       this.$http.get("/product/all").then((res) => {
-        console.log(res.data);
         this.products = res.data;
         this.set_max_min_price();
       });
