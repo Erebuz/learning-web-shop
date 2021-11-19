@@ -188,14 +188,14 @@ export default {
         case "лист":
           return `Лист ${product.width}x${product.height}x${product.thickness}`;
         case "труба":
-          return `Труба ${product.width}x${product.thickness}x${product.height}`;
+          return `Труба D${product.width}x${product.thickness}x${product.height}`;
         case "круг":
-          return `Круг ${product.thickness}x${product.height}`;
+          return `Круг D${product.thickness}x${product.height}`;
       }
     },
     check_basket(product) {
       if (!localStorage.getItem("basket")) {
-        return true;
+        return false;
       }
 
       let basket = JSON.parse(localStorage.getItem("basket"));

@@ -4,7 +4,11 @@
       <v-col class="col-6">
         <v-form ref="form" @submit.prevent="change_data">
           <h4>Тут вы можете изменить свои регистрационные данные</h4>
-          <user-register name="me" v-model="user"></user-register>
+          <user-register
+            name="me"
+            v-model="user"
+            :is-edit="true"
+          ></user-register>
           <v-btn block type="submit">Изменить данные</v-btn>
         </v-form>
       </v-col>
@@ -41,7 +45,9 @@ export default {
   },
   methods: {
     refresh_data() {
-      this.$http.get("/get_user_data").then((res) => (this.user = res.data));
+      this.$http
+        .get("/get_user_data")
+        .then((res) => (this.user = { ...res.data, password: "" }));
     },
     change_data() {
       if (this.$refs.form.validate()) {

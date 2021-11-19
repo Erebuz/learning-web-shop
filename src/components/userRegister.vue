@@ -23,11 +23,12 @@
       autocomplete="new-password"
       label="Пароль"
       placeholder="Обязательно"
-      :rules="[rules.required]"
+      :rules="isEdit ? [] : [rules.required]"
       outlined
       @change="refresh"
     />
     <v-text-field
+      value=""
       type="password"
       autocomplete="new-password"
       label="Подтверждение пароля"
@@ -90,7 +91,7 @@
 <script>
 export default {
   name: "userRegister",
-  props: ["value"],
+  props: ["value", "isEdit"],
   data() {
     return {
       user: this.value,
