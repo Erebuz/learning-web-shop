@@ -10,7 +10,7 @@
             </v-expansion-panel-header>
             <v-expansion-panel-content
               v-for="product in order.products"
-              :key="product.name"
+              :key="product.product_id"
               class="text-left"
             >
               {{ product.name }}, {{ product.count }}шт. на сумму
@@ -28,25 +28,7 @@ export default {
   name: "history",
   data() {
     return {
-      history: [
-        {
-          date: "12.03.2021 13:30:24",
-          summ: 1250,
-          status: "завершена",
-          products: [
-            {
-              name: "товар 1",
-              count: 2,
-              price: 625,
-            },
-            {
-              name: "товар 2",
-              count: 1,
-              price: 1240,
-            },
-          ],
-        },
-      ],
+      history: [],
     };
   },
   created() {
@@ -54,7 +36,32 @@ export default {
   },
   methods: {
     refresh_history() {
-      //  TODO: Запрос истории от сервера
+      this.$http.get("/order/history").then((res) => {
+        this.set_history(res.data);
+      });
+    },
+    set_history(data_arr) {
+      data_arr.forEach((order) => {
+        let history_order = this.history.find((item) => {
+          return item.date === order.date;
+        });
+        if (!history_order) {
+          this.history.push({
+            date: order.date,
+            summ: order.id,
+            status: order.status,
+            products: [],
+          });
+          history_order = this.history.find((item) => item.date === order.date);
+        }
+
+        history_order.products.push({
+          id: order.product_id,
+          name: order.description,
+          count: order.count,
+          price: order.price,
+        });
+      });
     },
   },
 };
