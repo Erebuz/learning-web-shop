@@ -48,7 +48,7 @@ export default {
         if (!history_order) {
           this.history.push({
             date: order.date,
-            summ: order.id,
+            summ: 0,
             status: order.status,
             products: [],
           });
@@ -61,6 +61,11 @@ export default {
           count: order.count,
           price: order.price,
         });
+
+        history_order.summ = 0;
+        history_order.products.forEach(
+          (product) => (history_order.summ += product.price * product.count)
+        );
       });
     },
   },

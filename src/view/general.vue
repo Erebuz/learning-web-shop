@@ -209,6 +209,7 @@ export default {
           "basket",
           JSON.stringify([{ id: product.id, count: 1 }])
         );
+        this.flag = !this.flag;
       } else {
         let basket = JSON.parse(localStorage.getItem("basket"));
         let basket_item = basket.find((item) => item.id === product.id);
@@ -221,8 +222,8 @@ export default {
           basket.push({ id: product.id, count: 1 });
         }
 
-        this.flag = !this.flag;
         localStorage.setItem("basket", JSON.stringify(basket));
+        this.flag = !this.flag;
       }
     },
     enc_to_basket(product) {

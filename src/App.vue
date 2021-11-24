@@ -90,7 +90,6 @@ export default {
         {
           title: "История заказов",
           path: "history",
-          permissions: ["client"],
         },
         {
           title: "Создание личных кабинетов",

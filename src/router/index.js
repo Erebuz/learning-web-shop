@@ -49,10 +49,7 @@ const routes = [
     name: "history",
     component: () => import("@/view/history"),
     meta: {
-      auth: {
-        roles: "client",
-        redirect: "/",
-      },
+      auth: true,
     },
   },
   {
