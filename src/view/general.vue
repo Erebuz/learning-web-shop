@@ -4,6 +4,7 @@
       <v-row class="justify-space-around">
         <template v-for="(product, index) in showing_products_list">
           <v-card
+            v-if="product.count !== 0"
             :key="product.id"
             width="400px"
             class="ma-2 d-flex flex-column"
