@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: "clientsHistory",
+  name: "orders",
   data() {
     return {
       history: [],

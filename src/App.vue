@@ -97,13 +97,18 @@ export default {
           permissions: ["admin", "owner"],
         },
         {
-          title: "Просмотр истории клиентов",
-          path: "clientsHistory",
+          title: "Неоплаченные заказы",
+          path: "orders",
           permissions: ["seller"],
         },
         {
           title: "Работа с товарами",
           path: "products",
+          permissions: ["seller", "owner"],
+        },
+        {
+          title: "Новый товар",
+          path: "new_product",
           permissions: ["seller", "owner"],
         },
         {
