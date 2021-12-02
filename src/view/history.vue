@@ -14,7 +14,7 @@
               class="text-left"
             >
               {{ product.name }}, {{ product.count }}шт. на сумму
-              {{ product.price }}
+              {{ product.price * product.count }}
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>

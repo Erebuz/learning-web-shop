@@ -14,7 +14,7 @@
               class="text-left"
             >
               {{ product.name }}, {{ product.count }}шт. на сумму
-              {{ product.price }}<br />
+              {{ product.price * product.count }}<br />
             </v-expansion-panel-content>
             <v-btn class="my-2" block @click="set_pay(order.products)"
               >Оплачено</v-btn

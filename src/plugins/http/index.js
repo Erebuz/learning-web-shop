@@ -3,12 +3,12 @@ import Vue from "vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
 
-// export const baseUrl =
-//   process.env.NODE_ENV !== "production"
-//     ? "http://10.0.117.63/"
-//     : "http://" + window.location.host;
+export const baseUrl =
+  process.env.NODE_ENV !== "production"
+    ? "http://19.19.1.2:5000/"
+    : "http://" + window.location.host + ":5000";
 
-export const baseUrl = "http://localhost:5000/";
+// export const baseUrl = "http://" + window.location.host + ":5000";
 
 axios.defaults.baseURL = baseUrl;
 Vue.use(VueAxios, axios);

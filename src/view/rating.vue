@@ -94,7 +94,6 @@ export default {
     product_list() {
       let temp = [];
       this.products_profit.forEach((item) => {
-        console.log(item);
         let product = this.product_types.find((prod) => item.type === prod.id);
 
         temp.push({
@@ -113,7 +112,6 @@ export default {
   methods: {
     load_data() {
       this.$http.get("/product/get_types").then((res) => {
-        console.log(res.data);
         this.product_types = res.data;
       });
     },
@@ -133,7 +131,6 @@ export default {
           end: `${end} 23:59:59`,
         })
         .then((res) => {
-          console.log(res.data);
           this.products_profit = res.data;
         });
     },
